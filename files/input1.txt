@@ -4,6 +4,7 @@ t u m u t
 0 0 0 0 0
 0 0 0 0 0
 
+tuk
 omut
 muss
 tost
