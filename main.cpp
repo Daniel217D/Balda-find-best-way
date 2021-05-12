@@ -16,6 +16,7 @@ const int maxRows = 5;
 const int maxCols = 5;
 
 string grid[maxRows][maxCols];
+string maxGrid[maxRows][maxCols];
 
 vector<string> alphabet;
 vector<string> words;
@@ -61,7 +62,14 @@ int main() {
         stepsAmount *= 2;
 
         putLetters();
-        cout << "Первый игрок может набрать максимум: " << firstPlayerMaxPoints << " очков";
+        cout << "Первый игрок может набрать максимум: " << firstPlayerMaxPoints << " очков\n";
+
+        for (int row = 0; row < maxRows; ++row) {
+            for (int col = 0; col < maxCols; ++col) {
+                cout << maxGrid[row][col] << " ";
+            }
+            cout << "\n";
+        }
     }
 
     return 0;
@@ -114,6 +122,11 @@ void findWord(const string &word, int row, int col, const int &letterRow, const 
         if(firstPlayerPoints > firstPlayerMaxPoints) {
             firstPlayerMaxPoints = firstPlayerPoints;
 
+            for (int row = 0; row < maxRows; ++row) {
+                for (int col = 0; col < maxCols; ++col) {
+                    maxGrid[row][col] = grid[row][col];
+                }
+            }
         }
 
         firstCurrentPlayer = !firstCurrentPlayer;
