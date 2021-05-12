@@ -56,13 +56,6 @@ int main() {
             }
         }
 
-        for (int i = 0; i < maxRows; ++i) {
-            for (int ii = 0; ii < maxCols; ++ii) {
-                cout << grid[i][ii] << " ";
-            }
-            cout << "\n";
-        }
-
         cout << "Максимальное количество ходов: ";
         cin >> stepsAmount;
         stepsAmount *= 2;
@@ -172,7 +165,6 @@ void findWords(const int &letterRow, const int &letterCol) {
 
                 visitedGrid[row][col] = true;
                 findWord(grid[row][col], row, col, letterRow, letterCol, visitedGrid);
-                visitedGrid[row][col] = false;
             }
         }
     }
