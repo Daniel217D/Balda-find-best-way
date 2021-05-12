@@ -10,8 +10,7 @@ int stepsAmount;
 
 int firstPlayerPoints = 0;
 int firstPlayerMaxPoints = 0;
-int secondPlayerPoints = 0;
-int currentPlayer = 1;
+int firstCurrentPlayer = true;
 
 const int maxRows = 5;
 const int maxCols = 5;
@@ -115,14 +114,16 @@ void findWord(const string &word, int row, int col, const int &letterRow, const 
     if (isWord(word) && isUnusedWord(word) && visitedGrid[letterRow][letterCol]) {
         usedWords.push_back(word);
 
-        int &currentPlayerPoints = (currentPlayer == 1 ? firstPlayerPoints : secondPlayerPoints);
-        currentPlayerPoints += word.length();
-
-        if(currentPlayerPoints > firstPlayerMaxPoints) {
-            firstPlayerMaxPoints = currentPlayerPoints;
+        if(firstCurrentPlayer) {
+            firstPlayerPoints += word.length();
         }
 
-        currentPlayer = currentPlayer == 1 ? 2 : 1;
+        if(firstPlayerPoints > firstPlayerMaxPoints) {
+            firstPlayerMaxPoints = firstPlayerPoints;
+
+        }
+
+        firstCurrentPlayer = !firstCurrentPlayer;
         stepsAmount--;
 
         if(stepsAmount > 0) {
@@ -130,9 +131,11 @@ void findWord(const string &word, int row, int col, const int &letterRow, const 
         }
 
         stepsAmount++;
-        currentPlayer = currentPlayer == 1 ? 2 : 1;
+        firstCurrentPlayer = !firstCurrentPlayer;
 
-        currentPlayerPoints -= word.length();
+        if(firstCurrentPlayer) {
+            firstPlayerPoints -= word.length();
+        }
 
         usedWords.pop_back();
     }
